@@ -1,5 +1,6 @@
 package es.usj.androidapps.alu100485.ho
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,7 @@ class Activity_b : AppCompatActivity() {
 
         val spinnerData = arrayOf("Country","Spain","USA","UK","JAPAN")
         spCountry.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerData)
+        spCountry.setSelection(0)
 
         radioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
             if(rbtnCitizen.isChecked){
@@ -23,14 +25,22 @@ class Activity_b : AppCompatActivity() {
                 spCountry.visibility = INVISIBLE
                 btnInitOpCompany.visibility = INVISIBLE
 
+
             }else {
                 rbtnCompany.setOnClickListener {
                     etCompanyID.visibility = VISIBLE
                     spCountry.visibility = VISIBLE
                     btnInitOpCompany.visibility = VISIBLE
 
+
                 }
             }
         })
+
+        btnInitOpCompany.setOnClickListener {
+            val intentFromBToC = Intent(this, Activity_c::class.java)
+            intentFromBToC.putExtra("id",etCompanyID.text.toString())
+            startActivity(intentFromBToC)
+        }
     }
 }
