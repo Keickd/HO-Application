@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_b">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="348dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.313">
+
+        <RadioButton
+            android:id="@+id/rbtnCitizen"
+            android:layout_width="191dp"
+            android:layout_height="wrap_content"
+            android:text="@string/citizen"
+            android:textSize="22sp" />
+
+        <RadioButton
+            android:id="@+id/rbtnCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/company"
+            android:textSize="22sp" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/etCompanyID"
+        android:layout_width="278dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:hint="Company ID"
+        android:inputType="textPersonName"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <Spinner
+        android:id="@+id/spCountry"
+        android:layout_width="278dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="36dp"
+        android:transitionName="sadads"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCompanyID" />
+
+    <Button
+        android:id="@+id/btnInitOpCompany"
+        android:layout_width="291dp"
+        android:layout_height="55dp"
+        android:text="Init operation"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.558"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCountry"
+        app:layout_constraintVertical_bias="0.183" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">HO!</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="user">User</string>
+    <string name="company">Company</string>
+    <string name="button">Button</string>
+    <string name="citizen">Citizen</string>
+</resources>
