@@ -16,7 +16,7 @@ class Activity_c : AppCompatActivity() {
 
         btnCall.setOnClickListener {
             val phoneNumber = etPhone.text.toString()
-            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse(phoneNumber)))
+            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber")))
         }
 
         btnSend.setOnClickListener {
@@ -25,7 +25,9 @@ class Activity_c : AppCompatActivity() {
         }
 
         btnOpen.setOnClickListener {
-            val url = etUrl.text.toString()
+            var url = etUrl.text.toString()
+            if (!url.startsWith("http://") && !url.startsWith("https://"))
+                url = "http://$url"
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
     }
