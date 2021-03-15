@@ -6,4 +6,9 @@
     <string name="company">Company</string>
     <string name="button">Button</string>
     <string name="citizen">Citizen</string>
+    <string name="orange">Orange</string>
+    <string name="yellow">Yellow</string>
+    <string name="avocado">Avocado</string>
+    <string name="weight">Weight</string>
+    <string name="kg">Kg</string>
 </resources>

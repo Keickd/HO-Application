@@ -13,12 +13,13 @@
         android:layout_marginTop="64dp"
         android:background="@drawable/text_view_borders"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="none"
         android:paddingStart="15sp"
-        android:textSize="22dp"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -48,8 +49,8 @@
             android:layout_width="91dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Orange"
-            android:textSize="20dp" />
+            android:text="@string/orange"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -80,8 +81,8 @@
             android:layout_width="92dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Yellow"
-            android:textSize="20dp" />
+            android:text="@string/yellow"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -112,17 +113,17 @@
             android:layout_width="92dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Avocado"
-            android:textSize="20dp" />
+            android:text="@string/avocado"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/etWeight"
         android:layout_width="98dp"
         android:layout_height="44dp"
-        android:text="Weight"
+        android:text="@string/weight"
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.22"
@@ -134,9 +135,9 @@
         android:id="@+id/etKg"
         android:layout_width="98dp"
         android:layout_height="44dp"
-        android:text="Kg"
+        android:text="@string/kg"
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.854"
@@ -149,7 +150,7 @@
         android:layout_width="66dp"
         android:layout_height="44dp"
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"

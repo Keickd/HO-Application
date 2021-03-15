@@ -2,6 +2,7 @@ package es.usj.androidapps.alu100485.ho
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_c.*
 import kotlinx.android.synthetic.main.activity_d.*
 
 class Activity_d : AppCompatActivity() {
@@ -13,6 +14,10 @@ class Activity_d : AppCompatActivity() {
         val yellow = 17
         val avocado = 21
         var total = 0
+
+        var clientName = intent.extras?.getString("clientName")
+        etClientName.setText(clientName)
+
         cbOrange.setOnCheckedChangeListener { buttonView, isChecked ->
             if(cbOrange.isChecked)
                 total += orange
@@ -23,7 +28,7 @@ class Activity_d : AppCompatActivity() {
         }
 
         cbYellow.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(cbOrange.isChecked)
+            if(cbYellow.isChecked)
                 total += yellow
             else
                 total -= yellow
@@ -32,7 +37,7 @@ class Activity_d : AppCompatActivity() {
         }
 
         cbAguacate.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(cbOrange.isChecked)
+            if(cbAguacate.isChecked)
                 total += avocado
             else
                 total -= avocado
