@@ -89,28 +89,15 @@ class Activity_b : AppCompatActivity() {
         }
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-            if (etCompanyID.text.toString() !="")
-                unlock1 = true
-            else
-                unlock1 = false
+            if (etCompanyID.text.toString() !="") unlock1 = true
+            else unlock1 = false
 
-            if (etNameCitizen.text.toString() !="")
-                unlock3 = true
-            else
-                unlock3 = false
+            if (etNameCitizen.text.toString() !="") unlock3 = true
+            else unlock3 = false
 
-            if (etSurnameCitizen.text.toString() !="")
-                unlock4 = true
-            else
-                unlock4 = false
+            if (etSurnameCitizen.text.toString() !="") unlock4 = true
+            else unlock4 = false
 
-            /*if(unlock1) {
-                btnInitOpCompany.isEnabled = true
-                btnInitOpCompany.isClickable = true
-            }else{
-                btnInitOpCompany.isEnabled = false
-                btnInitOpCompany.isClickable = false
-            }*/
             if(unlock3 && unlock4){
                 btnInitOpCitizen.isEnabled = true
                 btnInitOpCitizen.isClickable = true
