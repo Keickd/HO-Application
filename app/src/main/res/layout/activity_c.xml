@@ -40,6 +40,8 @@
             android:layout_width="72dp"
             android:layout_height="61dp"
             android:layout_weight="1"
+            android:clickable="false"
+            android:enabled="false"
             android:text="Send"
             android:textSize="17dp" />
 
@@ -106,6 +108,8 @@
             android:layout_width="72dp"
             android:layout_height="61dp"
             android:layout_weight="1"
+            android:clickable="false"
+            android:enabled="false"
             android:text="Call"
             android:textSize="17dp" />
 
@@ -145,6 +149,8 @@
             android:layout_width="72dp"
             android:layout_height="61dp"
             android:layout_weight="1"
+            android:clickable="false"
+            android:enabled="false"
             android:text="Open"
             android:textSize="17dp" />
 

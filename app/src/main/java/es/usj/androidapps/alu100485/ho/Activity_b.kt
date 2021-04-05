@@ -17,8 +17,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class Activity_b : AppCompatActivity() {
 
-    //private lateinit var binding: ActivityBBinding //This is for making views, lateinit is important
-    var unlock1 = false
+    var companyIDOk = false
+    var spinnerOk = false
+    var nameCitizenOk = false
+    var surnameCitizen = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_b)
@@ -26,22 +29,36 @@ class Activity_b : AppCompatActivity() {
         val spinnerData = arrayOf("Country","Spain","USA","UK","JAPAN")
         spCountry.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerData)
         spCountry.setSelection(0)
-        etCompanyID.addTextChangedListener(textWatcher)
+        etCompanyID.addTextChangedListener(CustomTextWatcher({
+            if(!etCompanyID.text.isNullOrBlank()) companyIDOk = true
+            else companyIDOk = false
+
+            checkCompany()
+        }))
+
         spCountry.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                if(position != 0 && unlock1){
-                    btnInitOpCompany.isEnabled = true
-                    btnInitOpCompany.isClickable = true
-                }else{
-                    btnInitOpCompany.isEnabled = false
-                    btnInitOpCompany.isClickable = false
-                }
-            }
+                if(position != 0 ) spinnerOk = true
+                else spinnerOk = false
 
+                checkCompany()
+            }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-        etNameCitizen.addTextChangedListener(textWatcher)
-        etSurnameCitizen.addTextChangedListener(textWatcher)
+
+        etNameCitizen.addTextChangedListener(CustomTextWatcher({
+            if(!etNameCitizen.text.isNullOrBlank()) nameCitizenOk = true
+            else nameCitizenOk = false
+
+            checkCitizen()
+        }))
+
+        etSurnameCitizen.addTextChangedListener(CustomTextWatcher({
+            if(!etSurnameCitizen.text.isNullOrBlank()) surnameCitizen = true
+            else surnameCitizen = false
+
+            checkCitizen()
+        }))
 
         radioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
             if(rbtnCitizen.isChecked){
@@ -52,7 +69,6 @@ class Activity_b : AppCompatActivity() {
                 etNameCitizen.visibility = VISIBLE
                 etSurnameCitizen.visibility= VISIBLE
                 btnInitOpCitizen.visibility = VISIBLE
-
             }else {
                 rbtnCompany.setOnClickListener {
                     etNameCitizen.visibility = GONE
@@ -80,31 +96,23 @@ class Activity_b : AppCompatActivity() {
 
     }
 
-    val textWatcher = object : TextWatcher {
-        var unlock3 = false
-        var unlock4 = false
-        override fun afterTextChanged(s: Editable?) {
+    private fun checkCitizen(){
+        if(nameCitizenOk && surnameCitizen){
+            btnInitOpCitizen.isEnabled = true
+            btnInitOpCitizen.isClickable = true
+        }else{
+            btnInitOpCitizen.isEnabled = false
+            btnInitOpCitizen.isClickable = false
         }
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+    }
 
-            if (etCompanyID.text.toString() !="") unlock1 = true
-            else unlock1 = false
-
-            if (etNameCitizen.text.toString() !="") unlock3 = true
-            else unlock3 = false
-
-            if (etSurnameCitizen.text.toString() !="") unlock4 = true
-            else unlock4 = false
-
-            if(unlock3 && unlock4){
-                btnInitOpCitizen.isEnabled = true
-                btnInitOpCitizen.isClickable = true
-            }else{
-                btnInitOpCitizen.isEnabled = false
-                btnInitOpCitizen.isClickable = false
-            }
+    private fun checkCompany(){
+        if(companyIDOk && spinnerOk){
+            btnInitOpCompany.isEnabled = true
+            btnInitOpCompany.isClickable = true
+        }else{
+            btnInitOpCompany.isEnabled = false
+            btnInitOpCompany.isClickable = false
         }
     }
 }

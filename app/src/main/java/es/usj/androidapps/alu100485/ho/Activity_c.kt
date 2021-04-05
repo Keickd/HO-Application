@@ -21,7 +21,42 @@ class Activity_c : AppCompatActivity() {
         var id = intent.extras?.getString("id")
         tvCompanyData.setText(id)
 
-        etPhone.addTextChangedListener(textWatcher)
+        etPhone.addTextChangedListener(CustomTextWatcher({
+            if(etPhone.text.toString().length == 9){
+                btnCall.isEnabled = true
+                btnCall.isClickable = true
+            }else{
+                btnCall.isEnabled = false
+                btnCall.isClickable = false
+            }
+        }))
+
+        etEmail.addTextChangedListener(CustomTextWatcher({
+            /*if(isEmailValid(etEmail.text.toString())){
+                btnSend.isEnabled = true
+                btnSend.isClickable = true
+            }else{
+                btnSend.isEnabled = true
+                btnSend.isClickable = true
+            }*/
+            if (etEmail.text.toString() != ""){
+                btnSend.isEnabled = true
+                btnSend.isClickable = true
+            }else{
+                btnSend.isEnabled = false
+                btnSend.isClickable = false
+            }
+        }))
+
+        etUrl.addTextChangedListener(CustomTextWatcher({
+            if (etUrl.text.toString() != ""){
+                btnOpen.isEnabled = true
+                btnOpen.isClickable = true
+            }else{
+                btnOpen.isEnabled = false
+                btnOpen.isClickable = false
+            }
+        }))
 
         btnCall.setOnClickListener {
             val phoneNumber = etPhone.text.toString()
@@ -41,46 +76,14 @@ class Activity_c : AppCompatActivity() {
         }
     }
 
-    val textWatcher = object : TextWatcher {
-        var unlock3 = false
-        var unlock4 = false
-        override fun afterTextChanged(s: Editable?) {
-        }
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-        fun isEmailValid(email: String): Boolean {
-            return Pattern.compile(
+    fun isEmailValid(email: String): Boolean {
+        return Pattern.compile(
                 "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
                         + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
                         + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
                         + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
                         + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
                         + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
-            ).matcher(email).matches()
-        }
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            var phonePattern = Regex("d{9}")
-            var mailPattern = Regex("[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}")
-            //Patterns.PHONE.matcher(etPhone.text.toString()).matches()
-           if(phonePattern.matches(etPhone.text.toString())){
-                btnCall.isEnabled = true
-                btnCall.isClickable = true
-            }
-            else{
-                btnCall.isEnabled = true
-                btnCall.isClickable = true
-            }
-
-            if(isEmailValid(etEmail.text.toString())){
-                btnSend.isEnabled = true
-                btnSend.isClickable = true
-            }
-            else{
-                btnSend.isEnabled = true
-                btnSend.isClickable = true
-            }
-
-        }
+        ).matcher(email).matches()
     }
 }
