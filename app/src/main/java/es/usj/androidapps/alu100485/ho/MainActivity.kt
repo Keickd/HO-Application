@@ -1,13 +1,20 @@
 package es.usj.androidapps.alu100485.ho
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.get
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -16,6 +23,10 @@ class MainActivity : AppCompatActivity() {
     var userOk = false
     var userPass = false
     private lateinit var mFirebaseAnalytics: FirebaseAnalytics
+    private var mFirebaseRemoteConfig: FirebaseRemoteConfig? = null
+    // Remote Config keys
+    private val BTNLOGIN = "btnlogin"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +34,14 @@ class MainActivity : AppCompatActivity() {
 
         mFirebaseAnalytics = Firebase.analytics
         mFirebaseAnalytics.setUserProperty("user_type", "standard")
+
+        mFirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 3600
+        }
+        mFirebaseRemoteConfig!!.setConfigSettingsAsync(configSettings)
+        mFirebaseRemoteConfig!!.setDefaultsAsync(R.xml.remote_config_defaults)
+        //We will execute the next part in "onResume"
 
         etUser.addTextChangedListener(CustomTextWatcher({
             if (!etUser.text.isNullOrBlank()) userOk = true
@@ -43,6 +62,33 @@ class MainActivity : AppCompatActivity() {
             val intentFromAToB = Intent(this, Activity_b::class.java)
             startActivity(intentFromAToB)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateData()
+    }
+
+
+    private fun updateData(){
+        mFirebaseRemoteConfig!!.fetchAndActivate()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val updated = task.result
+                    Log.d("MainActivity", "Config params updated: $updated")
+                    Toast.makeText(
+                        this, "Fetch and activate succeeded",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    val btnLoginButton = mFirebaseRemoteConfig!![BTNLOGIN].asString()
+                    btnLogin.setText(btnLoginButton)
+                } else {
+                    Toast.makeText(
+                        this, "Fetch failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 
     private fun checkUserAndPass(){
