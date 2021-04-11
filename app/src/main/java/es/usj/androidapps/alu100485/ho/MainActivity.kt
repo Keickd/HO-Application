@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var mFirebaseRemoteConfig: FirebaseRemoteConfig? = null
     // Remote Config keys
     private val BTNLOGIN = "btnlogin"
-
+    private val BTNREGISTER = "btnregister"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         mFirebaseRemoteConfig = Firebase.remoteConfig
         val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 3600
+            minimumFetchIntervalInSeconds = 0
         }
         mFirebaseRemoteConfig!!.setConfigSettingsAsync(configSettings)
         mFirebaseRemoteConfig!!.setDefaultsAsync(R.xml.remote_config_defaults)
@@ -62,6 +62,12 @@ class MainActivity : AppCompatActivity() {
             val intentFromAToB = Intent(this, Activity_b::class.java)
             startActivity(intentFromAToB)
         }
+
+        btnRegister.setOnClickListener {
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, null)
+            Toast.makeText(this, "You are already registered", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun onResume() {
@@ -81,7 +87,9 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     val btnLoginButton = mFirebaseRemoteConfig!![BTNLOGIN].asString()
+                    val btnRegisterButton = mFirebaseRemoteConfig!![BTNREGISTER].asString()
                     btnLogin.setText(btnLoginButton)
+                    btnRegister.setText(btnRegisterButton)
                 } else {
                     Toast.makeText(
                         this, "Fetch failed",
@@ -101,10 +109,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /*override fun onDestroy(){
-        super.onDestroy()
-        mFirebaseAnalytics.resetAnalyticsData()
-    }*/
 }
 
 class CustomTextWatcher(private val callback: () -> Unit) : TextWatcher {
